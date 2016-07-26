@@ -1,0 +1,4 @@
+{
+  "name": "Présentateur"
+, "files": [ {"filters": ["*.py", "*.html","*.md", "*.css", "CMakeLists.txt", "Find*.cmake"] } ]
+}

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" href="http://localhost:8888/accueil.css"> <!--Ceci importe le style dans le document-->
+		<meta charset="utf-8">
+		<title>Accueil Présentateur</title>
+	</head>
+
+
+	<body>
+		<div class="deroule">
+			<button class="button1" onclick="func1()">Ouvrir</button>
+			<div class="deroule-contenu">
+				<button class="button2" onclick="func1()">et modifier</button>
+				<button class="button2" onclick="func1()">et présenter</button>
+			</div>
+		</div>
+		<button class="bouttonA" onclick='window.location.href="http://localhost:8888/cgi/Creer.py"'>Créer</button>
+		<button class="bouttonA" onclick="func1()">Quitter</button>
+	<!--Script-->
+		<script>
+			function func1(){
+				var xhttp = new XMLHttpRequest();
+				xhttp.onreadystatechange = function() {
+					if (xhttp.readyState == 4 && xhttp.status == 200) {
+						document.getElementById("sortie").innerHTML = xhttp.responseText;
+					}
+				};
+				xhttp.open("POST", "/cgi/doc.py", true);
+				xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+				xhttp.send("test="+encodeURIComponent(document.getElementById("1").value));
+			}
+			<!--Fonction pour afficher dans la sortie lentrée-->
+			function creer(){
+				document.getElementById("sortie").innerHTML= document.getElementById("1").value
+			}
+		</script>
+	</body>   
+</html>

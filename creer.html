@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" href="http://localhost:8888/accueil.css"> <!--Ceci importe le style dans le document-->
+		<meta charset="utf-8">
+		<title>Créer une présentation</title>
+	</head>
+
+
+	<body>
+		<input type="text" name="fname" placeholder="Nom de la présentation" id="nom"><br>
+		<input type="text" name="fname" placeholder="Chemain où sera enregistré la présentation" id="cible"><br>
+		<textarea id="description" rows="5" cols="80" placeholder="Description du projet"></textarea>
+		<button class="bouttonA" onclick="c()">Créer</button>
+	<!--Script-->
+		<script>
+			function c(){
+				var xhttp = new XMLHttpRequest();
+				xhttp.onreadystatechange = function() {
+					if (xhttp.readyState == 4 && xhttp.status == 200) {
+						window.location="http://localhost:8888/cgi/presentateur.py";
+					}
+				};
+				xhttp.open("POST", "/cgi/CreerNouv.py", true);
+				xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+				xhttp.send("nom="+encodeURIComponent(document.getElementById("nom").value)+"&"+"cible="+encodeURIComponent(document.getElementById("cible").value)+"&"+"description="+encodeURIComponent(document.getElementById("description").value));
+			}
+			<!--Fonction pour afficher dans la sortie lentrée-->
+		</script>
+	</body>   
+</html>

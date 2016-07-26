@@ -1,0 +1,95 @@
+body{
+	background-image:url("http://localhost:8888/back_ac.jpg");
+	background-size:cover;
+}
+/*Truc de bouton*/
+/*Conteneur pour la liste déroulante <div>*/
+.deroule{
+	position:relative;
+	display: inline-block;
+	float:left
+}
+/*Bouton de liste déroulante*/
+.button1{
+	background-color: #686FFF;
+	border: none;
+	color: #FFFFFF;
+	font-size:20px;
+	font-weight: bold;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	/*display: inline-block;*/
+	-webkit-transition-duration: 0.4s; /* Safari */
+	transition-duration: 0.4s;
+	/*float: left;					/*Colle les boutons les uns aux autres*/
+	border: 1px solid #0000b0;
+}
+/*Conteneur pour le contenu de la liste déroulante <div>2*/
+.deroule-contenu {
+	
+	position:absolute;
+	/*background-color:#601010;
+	min-width:160px;
+	box-shadow:0px 8px 16px 0px rgba(0,0,0,0.2);*/
+	visibility:hidden;
+	opacity:0;
+	transition:opacity 0.5s linear;
+	
+	
+	
+}
+.deroule-contenu .button2{
+	background-color: #AA3030;
+	border: none;
+	color: #FFFFFF;
+	font-size:20px;
+	font-weight: bold;
+	padding: 12px 16px;
+	text-align: center;
+	text-decoration: none;
+	/*display: inline-block;*/
+	-webkit-transition-duration: 0.5s; /* Safari */
+	transition-duration: 0.5s;
+	float: left;					/*Colle les boutons les uns aux autres*/
+	border: 1px solid #0000b0;
+	min-width:160px;
+	
+	
+	
+}
+.deroule-contenu .button2:hover{
+	background-color: #FF5050;
+}
+.deroule:hover .deroule-contenu{
+	visibility:visible;
+	opacity:0.7;
+	
+	
+}
+.button1:hover{
+	background-color:#0000b0;
+}
+/*Boutons non déroulant*/
+.bouttonA{
+	background-color: #686FFF;
+	border: none;
+	color: #FFFFFF;
+	font-size:20px;
+	font-weight: bold;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	-webkit-transition-duration: 0.4s; /* Safari */
+	transition-duration: 0.4s;
+	float: left;					/*Colle les boutons les uns aux autres*/
+	border: 1px solid #0000b0;
+}
+.bouttonA:hover{
+	background-color:#0000b0;
+}
+.bouttonA:active{
+	background-color:#AAAFFF;
+	transition-duration: 0.2s;
+}
