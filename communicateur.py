@@ -6,7 +6,7 @@ class LanceLeComServeur(Thread):
 		import socket
 		Thread.__init__(self)
 		self.TCP_IP = '127.0.0.1'
-		self.TCP_PORT = 5006 # On devrait faire de quoi pour rendre ça transformable
+		self.TCP_PORT = 5005 # On devrait faire de quoi pour rendre ça transformable
 		self.BUFFER_SIZE = 20  # Normally 1024, but we want fast response
 		self.s=""
 		self.s =socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -23,6 +23,19 @@ class LanceLeComServeur(Thread):
 			return a.read()
 		except:
 			return str(sys.exc_info())
+	def lister(self):
+		import os 
+		l=os.listdir('presentemp/')
+		del l[l.index("rap.html")]
+		f=open('presentemp/rap.html','w')
+		f.write("""<div id="content">\n<table style="width:100%">\n""")
+		for i in l:
+			f1=open("presentemp/"+i+ "/info.inf",'r')
+			f.write("<tr>\n\t<th>"+f1.readline()+"</th>\n\t<th>"+f1.readline()+"</th>\n\t<th>"+f1.readline()+"</th>\n\t<th>"+f1.readline()+"</th>\n</tr>\n")
+			f1.close()
+		f.write("</table>\n</div>")
+		f.close()
+		return ""
 	def creer(self,ls):
 		import os
 		l=ls.split('|')
@@ -57,6 +70,10 @@ class LanceLeComServeur(Thread):
 		elif self.msg[0]=='s':
 			self.servar()
 			return True
+		elif self.msg[0]=='l':
+			self.conn.send(bytes(self.lister(),'UTF-8'))  # echo
+			self.servar()
+			return False
 		elif self.msg[0]=='e':
 			self.conn.send(bytes(self.creer(self.msg[1:]),'UTF-8'))  # echo
 			self.servar()

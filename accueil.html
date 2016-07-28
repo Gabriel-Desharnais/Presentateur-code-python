@@ -2,6 +2,7 @@
 <html>
 	<head>
 		<link rel="stylesheet" href="http://localhost:8888/accueil.css"> <!--Ceci importe le style dans le document-->
+				<link rel="import" id="table" href="http://localhost:8888/presentemp/rap.html">
 		<meta charset="utf-8">
 		<title>Accueil Présentateur</title>
 	</head>
@@ -17,6 +18,12 @@
 		</div>
 		<button class="bouttonA" onclick='window.location.href="http://localhost:8888/cgi/Creer.py"'>Créer</button>
 		<button class="bouttonA" onclick="func1()">Quitter</button>
+		<script>
+			var getImport  = document.querySelector('#table');
+			var getContent = getImport.import.querySelector('#content');
+			document.body.appendChild(document.importNode(getContent, true));
+		</script>
+
 	<!--Script-->
 		<script>
 			function func1(){

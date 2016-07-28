@@ -6,5 +6,5 @@ from gogogadjet import *
 cgitb.enable()
 print("Content-type: text/html; charset=utf-8\n")
 page_acueil=gogogadjet("accueil.html")
-
+gogoReListe()
 print(page_acueil)
