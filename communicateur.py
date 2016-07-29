@@ -6,7 +6,7 @@ class LanceLeComServeur(Thread):
 		import socket
 		Thread.__init__(self)
 		self.TCP_IP = '127.0.0.1'
-		self.TCP_PORT = 5005 # On devrait faire de quoi pour rendre ça transformable
+		self.TCP_PORT = 5007 # On devrait faire de quoi pour rendre ça transformable
 		self.BUFFER_SIZE = 20  # Normally 1024, but we want fast response
 		self.s=""
 		self.s =socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -29,6 +29,7 @@ class LanceLeComServeur(Thread):
 		del l[l.index("rap.html")]
 		f=open('presentemp/rap.html','w')
 		f.write("""<div id="content">\n<table style="width:100%">\n""")
+		f.write("<tr>\n\t<th>Nom du fichier</th>\n\t<th>Cible</th>\n\t<th>Description</th>\n\t<th>Date de création</th>\n</tr>\n")
 		for i in l:
 			f1=open("presentemp/"+i+ "/info.inf",'r')
 			f.write("<tr>\n\t<th>"+f1.readline()+"</th>\n\t<th>"+f1.readline()+"</th>\n\t<th>"+f1.readline()+"</th>\n\t<th>"+f1.readline()+"</th>\n</tr>\n")
