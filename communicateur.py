@@ -6,7 +6,7 @@ class LanceLeComServeur(Thread):
 		import socket
 		Thread.__init__(self)
 		self.TCP_IP = '127.0.0.1'
-		self.TCP_PORT = 5007 # On devrait faire de quoi pour rendre ça transformable
+		self.TCP_PORT = 5014 # On devrait faire de quoi pour rendre ça transformable
 		self.BUFFER_SIZE = 20  # Normally 1024, but we want fast response
 		self.s=""
 		self.s =socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -33,12 +33,13 @@ class LanceLeComServeur(Thread):
 		f.write("<tr>\n\t<th>Nom du fichier</th>\n\t<th>Cible</th>\n\t\n\t<th>Date de création</th>\n</tr>\n")
 		for i in l:
 			f1=open("presentemp/"+i+ "/info.inf",'r')
-			f.write("<tr>\n\t<th>"+"\n".join(list(f1.readline()))+"</th>\n\t<th>"+"\n".join(list(f1.readline()))+"""<span><h3>description:</h3><pre>"""+"\n".join(list(f1.readline()))+"""</pre><img src="http://static.canalblog.com/storagev1/psistar.canalblog.com/images/t-DSCF00081.JPG" height="126" width="126"><p></p>
+			f.write("<tr>\n\t<th>"+"\n".join(eval(f1.readline()))+"</th>\n\t<th>"+"\n".join(eval(f1.readline()))+"""<span><h3>description:</h3><pre>"""+"\n".join(eval(f1.readline()))+"""</pre><img src="http://static.canalblog.com/storagev1/psistar.canalblog.com/images/t-DSCF00081.JPG" height="126" width="126"><p></p>
 <button type="button" class="sup" style="float:left;">Modifier</button><button type="button" class="sup" style="float:right;">Présenter</button>
-</span></th>\n\t"""+"\n\t<th>"+"\n".join(list(f1.readline()))+"</th>\n</tr>\n")
+</span></th>\n\t"""+"\n\t<th>"+"\n".join(eval(f1.readline()))+"</th>\n</tr>\n")
 			f1.close()
 		f.write("</table>\n</div>")
 		f.close()
+		
 		return ""
 	def creer(self,ls):
 		import os
@@ -46,15 +47,17 @@ class LanceLeComServeur(Thread):
 		r=range(0,100)
 		r=list(r)
 		h=-1
+		print("a")
 		for f in r:
 			if not os.path.exists('presentemp/'+str(f)):
 				os.makedirs('presentemp/'+str(f))
 				h=f
 				break
+		print("b")
 		if not(h==-1):
 			f=open('presentemp/'+str(h)+'/info.inf','w')
 			for e in l:
-				f.write(e.split("\n")+'\n')
+				f.write(str(e.split("\n"))+'\n')
 			f.close()
 		return "Creer"
 	def servdem(self):
