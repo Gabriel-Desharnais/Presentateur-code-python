@@ -28,11 +28,11 @@ class LanceLeComServeur(Thread):
 		l=os.listdir('presentemp/')
 		del l[l.index("rap.html")]
 		f=open('presentemp/rap.html','w')
-		f.write("""<div id="content">\n<table style="width:100%">\n""")
-		f.write("<tr>\n\t<th>Nom du fichier</th>\n\t<th>Cible</th>\n\t<th>Description</th>\n\t<th>Date de création</th>\n</tr>\n")
+		f.write("""<div id="contente">\n<table style="width:100%">\n""")
+		f.write("<tr>\n\t<th>Nom du fichier</th>\n\t<th>Cible</th>\n\t<span>Description</span>\n\t<th>Date de création</th>\n</tr>\n")
 		for i in l:
 			f1=open("presentemp/"+i+ "/info.inf",'r')
-			f.write("<tr>\n\t<th>"+f1.readline()+"</th>\n\t<th>"+f1.readline()+"</th>\n\t<th>"+f1.readline()+"</th>\n\t<th>"+f1.readline()+"</th>\n</tr>\n")
+			f.write("<tr>\n\t<th>"+f1.readline()+"</th>\n\t<th>"+f1.readline()+"</th>\n\t<span>"+f1.readline()+"</span>\n\t<th>"+f1.readline()+"</th>\n</tr>\n")
 			f1.close()
 		f.write("</table>\n</div>")
 		f.close()
