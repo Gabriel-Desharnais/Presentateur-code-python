@@ -26,13 +26,16 @@ class LanceLeComServeur(Thread):
 	def lister(self):
 		import os 
 		l=os.listdir('presentemp/')
-		del l[l.index("rap.html")]
+		if not( l.index("rap.html")==-1):
+			del l[l.index("rap.html")]
 		f=open('presentemp/rap.html','w')
 		f.write("""<div id="contente">\n<table style="width:100%">\n""")
-		f.write("<tr>\n\t<th>Nom du fichier</th>\n\t<th>Cible</th>\n\t<span>Description</span>\n\t<th>Date de création</th>\n</tr>\n")
+		f.write("<tr>\n\t<th>Nom du fichier</th>\n\t<th>Cible</th>\n\t\n\t<th>Date de création</th>\n</tr>\n")
 		for i in l:
 			f1=open("presentemp/"+i+ "/info.inf",'r')
-			f.write("<tr>\n\t<th>"+f1.readline()+"</th>\n\t<th>"+f1.readline()+"</th>\n\t<span>"+f1.readline()+"</span>\n\t<th>"+f1.readline()+"</th>\n</tr>\n")
+			f.write("<tr>\n\t<th>"+"\n".join(list(f1.readline()))+"</th>\n\t<th>"+"\n".join(list(f1.readline()))+"""<span><h3>description:</h3><pre>"""+"\n".join(list(f1.readline()))+"""</pre><img src="http://static.canalblog.com/storagev1/psistar.canalblog.com/images/t-DSCF00081.JPG" height="126" width="126"><p></p>
+<button type="button" class="sup" style="float:left;">Modifier</button><button type="button" class="sup" style="float:right;">Présenter</button>
+</span></th>\n\t"""+"\n\t<th>"+"\n".join(list(f1.readline()))+"</th>\n</tr>\n")
 			f1.close()
 		f.write("</table>\n</div>")
 		f.close()
@@ -51,7 +54,7 @@ class LanceLeComServeur(Thread):
 		if not(h==-1):
 			f=open('presentemp/'+str(h)+'/info.inf','w')
 			for e in l:
-				f.write(e+'\n')
+				f.write(e.split("\n")+'\n')
 			f.close()
 		return "Creer"
 	def servdem(self):

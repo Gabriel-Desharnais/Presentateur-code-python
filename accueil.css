@@ -114,10 +114,56 @@ th, td {
     text-align: center;
     padding: 8px;
 }
- #contente span{display:none;}
-#contente:hover span {display:block;}
 
 tr:nth-child(even){background-color: #f2f2f2}
+tr:nth-child(even):hover{background-color: #a2a2a2}
 
 tr:nth-child(odd){background-color: #e2e2e2}
+tr:nth-child(odd):hover{background-color: #a2a2a2}
 tr:nth-child(1){background-color: #00a000}
+tr:nth-child(1):hover{background-color: #00a000}
+tr{
+position:relative;
+}
+tr span {
+text-align: left;
+    display:none;
+padding:0 20px;
+width: 80%;
+left: 10%;
+padding: 5px 15px;
+background: rgba(0,0,0,.8);
+border-radius: 5px;
+color: #fff;
+}
+tr:hover span {
+
+    display:block;
+    position:fixed;
+  
+}
+span:before{
+    content:'';
+    position:absolute;
+    width: 0; 
+  height: 0; 
+left:5%;
+top:-7px;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent; 
+  
+  border-bottom:7px solid rgba(0,0,0,.8); 
+}
+.sup{
+display:inline-block;
+background:#eeffee;
+padding:10px 20px;
+border-radius: 5px;
+}
+.sup:hover{
+background:#ccffcc;
+}
+.sup:active{
+background:#aaffaa;
+border: 2px solid #DFDFDF;
+}
