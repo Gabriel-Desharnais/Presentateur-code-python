@@ -34,7 +34,7 @@ class LanceLeComServeur(Thread):
 		for i in l:
 			f1=open("presentemp/"+i+ "/info.inf",'r')
 			f.write("<tr>\n\t<th>"+"\n".join(eval(f1.readline()))+"</th>\n\t<th>"+"\n".join(eval(f1.readline()))+"""<span><h3>description:</h3><pre>"""+"\n".join(eval(f1.readline()))+"""</pre><img src="http://static.canalblog.com/storagev1/psistar.canalblog.com/images/t-DSCF00081.JPG" height="126" width="126"><p></p>
-<button type="button" class="sup" style="float:left;">Modifier</button><button type="button" class="sup" style="float:right;">Présenter</button>
+<button type="button" class="sup" onclick="modt(\'"""+str(i)+"""\')" style="float:left;">Modifier</button><button type="button" class="sup" style="float:right;">Présenter</button>
 </span></th>\n\t"""+"\n\t<th>"+"\n".join(eval(f1.readline()))+"</th>\n</tr>\n")
 			f1.close()
 		f.write("</table>\n</div>")

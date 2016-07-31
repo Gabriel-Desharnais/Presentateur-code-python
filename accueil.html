@@ -41,6 +41,17 @@
 			function creer(){
 				document.getElementById("sortie").innerHTML= document.getElementById("1").value
 			}
+			function modt(n){
+				var xhttp = new XMLHttpRequest();
+				xhttp.onreadystatechange = function() {
+					if (xhttp.readyState == 4 && xhttp.status == 200) {
+						window.location="http://localhost:8888/cgi/mod.py";
+					}
+				};
+				xhttp.open("POST", "/cgi/CreerNouv.py", true);
+				xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+				xhttp.send("id="+n);
+			}
 		</script>
 	</body>   
 </html>
