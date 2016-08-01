@@ -59,6 +59,10 @@ class LanceLeComServeur(Thread):
 			for e in l:
 				f.write(str(e.split("\n"))+'\n')
 			f.close()
+			f=open('presentemp/'+str(h)+'/0.html','w')
+			f.close()
+			f=open('presentemp/'+str(h)+'/0.css','w')
+			f.close()
 		return "Creer"
 	def servdem(self):
 		self.msg=""
