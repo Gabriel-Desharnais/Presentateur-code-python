@@ -6,4 +6,4 @@ import cgi
 form = cgi.FieldStorage()
 print("Content-type: text/html; charset=utf-8\n")
 
-print(form.getvalue("id"))
+print("Vous êtes en train de modifier la présentation",form.getvalue("id"))
