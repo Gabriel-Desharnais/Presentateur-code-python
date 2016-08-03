@@ -1,0 +1,65 @@
+<html>
+	<head>
+		<!--<link rel="stylesheet" href="http://localhost:8888/accueil.css"> <!--Ceci importe le style dans le document-->
+			<!--	<link rel="import" id="table" href="http://localhost:8888/presentemp/rap.html">-->
+		<meta charset="utf-8">
+		<title>Modifier présentation</title>
+		<style>
+		#a0{
+			position:fixed;
+			left:100px;
+			top:100px;
+			width:300px;
+			height:300px;
+			background:blue;
+			}
+		</style>
+	</head>
+
+
+	<body>
+		<div id="a0">
+		<p>blablabbldsjklfajdslkfjadslkfj ew dsfldksjf</p>
+		</div>
+		<script>
+			var boxElement = document.getElementById('a0');
+
+if (boxElement) {
+    boxElement.addEventListener('mousedown', function () {
+        // Calculate and store some of the box coordinates:
+        var boxLeftPos = boxElement.offsetLeft;
+       
+        // Recalculate position:
+        boxElement.style.left = (boxLeftPos + 10) + 'px';
+    });
+}
+		</script>
+		<script>
+			var getImport  = document.querySelector('#table');
+			var getContent = getImport.import.querySelector('#contente');
+			document.body.appendChild(document.importNode(getContent, true));
+		</script>
+	<!--Script-->
+		<script>
+			function func1(){
+				var xhttp = new XMLHttpRequest();
+				xhttp.onreadystatechange = function() {
+					if (xhttp.readyState == 4 && xhttp.status == 200) {
+						document.getElementById("sortie").innerHTML = xhttp.responseText;
+					}
+				};
+				xhttp.open("POST", "/cgi/doc.py", true);
+				xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+				xhttp.send("test="+encodeURIComponent(document.getElementById("1").value));
+			}
+			<!--Fonction pour afficher dans la sortie lentrée-->
+			function creer(){
+				document.getElementById("sortie").innerHTML= document.getElementById("1").value;
+			}
+			function modt(n){
+				document.getElementById('modn').value=n;
+				document.getElementById('mod').submit();
+			}
+		</script>
+	</body>   
+</html>
