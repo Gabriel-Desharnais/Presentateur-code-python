@@ -5,45 +5,58 @@
 		<meta charset="utf-8">
 		<title>Modifier présentation</title>
 		<style>
-		#a0{
+		div{
 			position:fixed;
+			}
+		div:hover{
+			border:3px solid #000000;
+			}
+		div:active{
+			opacity:0.7;
+			}
+		#a0{
 			left:100px;
 			top:100px;
 			width:300px;
 			height:300px;
 			background:blue;
 			}
+		#a1{
+			left:550px;
+			top:75px;
+			width:50px;
+			height:50px;
+			background:red;
+			}
 		</style>
 	</head>
 
 
 	<body>
-	<p id="aa"></p>
+		<div id="a1">
+		</div>
 		<div id="a0">
-		<p>blablabbldsjklfajdslkfjadslkfj ew dsfldksjf</p>
+		<p>b 1</p>
 		</div>
 		<script>
 			var inside = 0;
 			var boxElement = document.getElementById('a0');
 			var x=0;
 			var y=0;
-
-if (boxElement) {
-    boxElement.addEventListener('mousedown', function (event) {
-		//document.getElementById("aa").innerHTML=event.clientX-parseInt(boxElement.style.left,10);
-		x=event.clientX-parseInt(boxElement.offsetLeft,10);
-		if (isNaN(x)){
-			document.getElementById("aa").innerHTML=event.clientX+','+boxElement.style.left+','+parseInt(boxElement.style.left,10);
-			x=event.clientX-parseInt(boxElement.style.left,10);
-			}
-		y=event.clientY-parseInt(boxElement.offsetTop,10);
-		if (isNaN(y)){
-			y=event.clientY-parseInt(boxElement.style.top,10);
-			}
-		//détermine que l'élément est sélectionné
-		inside=1;
+			var list = document.getElementsByTagName("div");
+			for (var i = 0; i < list.length; i++) {
+				if (list[i]) {
+					list[i].addEventListener('mousedown', function (event) {
+						boxElement=this;
+						//document.getElementById("aa").innerHTML=event.clientX-parseInt(boxElement.style.left,10);
+						x=event.clientX-parseInt(boxElement.offsetLeft,10);
+						y=event.clientY-parseInt(boxElement.offsetTop,10);
+						//détermine que l'élément est sélectionné
+						inside=1;
     });
 }
+}
+
 		</script>
 		<script>
     document.addEventListener("mousemove", function (event) {
