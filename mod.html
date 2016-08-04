@@ -53,6 +53,38 @@
 						y=event.clientY-parseInt(boxElement.offsetTop,10);
 						//détermine que l'élément est sélectionné
 						inside=1;
+						if((boxElement.offsetLeft+boxElement.offsetWidth-event.clientX)<8){
+							inside=2;
+							}
+						if((boxElement.offsetTop+boxElement.offsetHeight-event.clientY)<8){
+							inside=3;
+							}
+    });
+					list[i].addEventListener('mousemove', function (event) {
+						boxElement=this;
+						if((boxElement.offsetLeft+boxElement.offsetWidth-event.clientX)<8){
+							boxElement.style.borderRight=7+'px solid black';
+							}
+						else{
+							boxElement.style.borderRight=3+'px solid black';
+							}
+						if((boxElement.offsetTop+boxElement.offsetHeight-event.clientY)<8){
+							boxElement.style.borderBottom=7+'px solid black';
+							}
+						else{
+							boxElement.style.borderBottom=3+'px solid black';
+							}
+						
+    });
+						list[i].addEventListener("mouseleave", function (event) {
+						boxElement=this;
+						boxElement.style.border=0+'px solid black';
+						
+    });
+						list[i].addEventListener("mouseover", function (event) {
+						boxElement=this;
+						boxElement.style.border=3+'px solid black';
+						
     });
 }
 }
@@ -61,16 +93,16 @@
 		<script>
     document.addEventListener("mousemove", function (event) {
 		if(inside==1){
-        // Recalculate position:
-        if (isNaN(x)){
-			x=0;
-			}
-		if (isNaN(y)){
-			y=0;
-			}
+        
         boxElement.style.left = (event.clientX-x) + 'px';
         boxElement.style.top = (event.clientY-y)+ 'px';
         }
+		if(inside==2){
+			boxElement.style.width=(event.clientX-boxElement.offsetLeft)+'px';
+			}
+		if(inside==3){
+			boxElement.style.height=(event.clientY-boxElement.offsetTop)+'px';
+			}
     });
 		document.addEventListener('mouseup', function () {
 		//détermine que l'élément est sélectionné
