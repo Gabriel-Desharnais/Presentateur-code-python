@@ -18,22 +18,53 @@
 
 
 	<body>
+	<p id="aa"></p>
 		<div id="a0">
 		<p>blablabbldsjklfajdslkfjadslkfj ew dsfldksjf</p>
 		</div>
 		<script>
+			var inside = 0;
 			var boxElement = document.getElementById('a0');
+			var x=0;
+			var y=0;
 
 if (boxElement) {
-    boxElement.addEventListener('mousedown', function () {
-        // Calculate and store some of the box coordinates:
-        var boxLeftPos = boxElement.offsetLeft;
-       
-        // Recalculate position:
-        boxElement.style.left = (boxLeftPos + 10) + 'px';
+    boxElement.addEventListener('mousedown', function (event) {
+		//document.getElementById("aa").innerHTML=event.clientX-parseInt(boxElement.style.left,10);
+		x=event.clientX-parseInt(boxElement.offsetLeft,10);
+		if (isNaN(x)){
+			document.getElementById("aa").innerHTML=event.clientX+','+boxElement.style.left+','+parseInt(boxElement.style.left,10);
+			x=event.clientX-parseInt(boxElement.style.left,10);
+			}
+		y=event.clientY-parseInt(boxElement.offsetTop,10);
+		if (isNaN(y)){
+			y=event.clientY-parseInt(boxElement.style.top,10);
+			}
+		//détermine que l'élément est sélectionné
+		inside=1;
     });
 }
 		</script>
+		<script>
+    document.addEventListener("mousemove", function (event) {
+		if(inside==1){
+        // Recalculate position:
+        if (isNaN(x)){
+			x=0;
+			}
+		if (isNaN(y)){
+			y=0;
+			}
+        boxElement.style.left = (event.clientX-x) + 'px';
+        boxElement.style.top = (event.clientY-y)+ 'px';
+        }
+    });
+		document.addEventListener('mouseup', function () {
+		//détermine que l'élément est sélectionné
+		inside=0;
+    });
+		</script>
+		
 		<script>
 			var getImport  = document.querySelector('#table');
 			var getContent = getImport.import.querySelector('#contente');
