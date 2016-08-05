@@ -61,29 +61,26 @@
 							}
     });
 					list[i].addEventListener('mousemove', function (event) {
-						boxElement=this;
-						if((boxElement.offsetLeft+boxElement.offsetWidth-event.clientX)<8){
-							boxElement.style.borderRight=7+'px solid black';
+						if((this.offsetLeft+this.offsetWidth-event.clientX)<8){
+							this.style.borderRight=7+'px solid black';
 							}
 						else{
-							boxElement.style.borderRight=3+'px solid black';
+							this.style.borderRight=3+'px solid black';
 							}
-						if((boxElement.offsetTop+boxElement.offsetHeight-event.clientY)<8){
-							boxElement.style.borderBottom=7+'px solid black';
+						if((this.offsetTop+this.offsetHeight-event.clientY)<8){
+							this.style.borderBottom=7+'px solid black';
 							}
 						else{
-							boxElement.style.borderBottom=3+'px solid black';
+							this.style.borderBottom=3+'px solid black';
 							}
 						
     });
 						list[i].addEventListener("mouseleave", function (event) {
-						boxElement=this;
-						boxElement.style.border=0+'px solid black';
+						this.style.border=0+'px solid black';
 						
     });
 						list[i].addEventListener("mouseover", function (event) {
-						boxElement=this;
-						boxElement.style.border=3+'px solid black';
+						this.style.border=3+'px solid black';
 						
     });
 }
