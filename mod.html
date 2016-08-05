@@ -5,13 +5,18 @@
 		<meta charset="utf-8">
 		<title>Modifier présentation</title>
 		<style>
-		div{
+		.text{
 			position:fixed;
+			top:100px;
+			left:100px;
+			width:100px;
+			height:100px;
+			background:green;
 			}
-		div:hover{
+		.text:hover{
 			border:3px solid #000000;
 			}
-		div:active{
+		.text:active{
 			opacity:0.7;
 			}
 		#a0{
@@ -28,16 +33,72 @@
 			height:50px;
 			background:red;
 			}
+		#cont{
+			position:fixed;
+			left:5%;
+			top:0px;
+			height:100%;
+			width:95%;
+			background:#999999;
+			}
+		#outils{
+			position:fixed;
+			left:0%;
+			top:0px;
+			height:100%;
+			width:5%;
+			background:#ccccff;
+			}
+		.bouttonA{
+	background-color: #686FFF;
+	border: none;
+	color: #FFFFFF;
+	font-size:12px;
+	font-weight: bold;
+	padding: 15px 0px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	-webkit-transition-duration: 0.4s; /* Safari */
+	transition-duration: 0.4s;
+	float: left;					/*Colle les boutons les uns aux autres*/
+	border: 1px solid #0000b0;
+}
+.bouttonA:hover{
+	background-color:#0000b0;
+}
+.bouttonA:active{
+	background-color:#AAAFFF;
+	transition-duration: 0.2s;
+}
+		#creer{
+			position:relative;
+			left:10px;
+			top:10px;
+			height:50px;
+			width:50px;
+			}
 		</style>
 	</head>
 
 
 	<body>
-		<div id="a1">
+	<div id="cont">
+		<div id="first">
 		</div>
-		<div id="a0">
+		<div class="text" id="a1">
+		</div>
+		<div class="text" id="a0">
 		<p>b 1</p>
 		</div>
+		<div id="last">
+		</div>
+		</div>
+	<div id="outils">
+		<div id="creer">
+			 <button class="bouttonA" type="button" onclick="ajouter_text()">Créer</button> 
+		</div>
+	</div>
 		<script>
 			var inside = 0;
 			var boxElement = document.getElementById('a0');
@@ -47,7 +108,9 @@
 			var X=0;
 			var H=0;
 			var L=0;
-			var list = document.getElementsByTagName("div");
+			ecoute();
+			function ecoute(){
+			var list = document.getElementsByClassName("text");
 			for (var i = 0; i < list.length; i++) {
 				if (list[i]) {
 					list[i].addEventListener('mousedown', function (event) {
@@ -111,10 +174,10 @@
     });
 }
 }
-
+}
 		</script>
 		<script>
-    document.addEventListener("mousemove", function (event) {
+    document.getElementById('cont').addEventListener("mousemove", function (event) {
 		if(inside==1){
         
         boxElement.style.left = (event.clientX-x) + 'px';
@@ -140,14 +203,14 @@
 		inside=0;
     });
 		</script>
-		
-		<script>
-			var getImport  = document.querySelector('#table');
-			var getContent = getImport.import.querySelector('#contente');
-			document.body.appendChild(document.importNode(getContent, true));
-		</script>
 	<!--Script-->
 		<script>
+			function ajouter_text(){
+				var element = document.createElement("div");
+				element.className = "text";
+				document.getElementById('cont').insertBefore(element, document.getElementById('last'));
+				ecoute();
+				}
 			function func1(){
 				var xhttp = new XMLHttpRequest();
 				xhttp.onreadystatechange = function() {
