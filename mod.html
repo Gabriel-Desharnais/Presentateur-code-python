@@ -108,6 +108,7 @@
 			var X=0;
 			var H=0;
 			var L=0;
+			var that=null;
 			ecoute();
 			function ecoute(){
 			var list = document.getElementsByClassName("text");
@@ -172,6 +173,20 @@
 						this.style.border=3+'px solid black';
 						
     });
+												var menu = [{
+        name: 'prop',
+        title: 'Propriété',
+        fun: function () {
+            alert('i am add button')
+        }
+    }];
+						list[i].addEventListener("click", function (event) {
+						that=this;
+						this.contextMenu(menu);
+						alert('e')
+    });
+
+						//list[i].contextMenu(menu,{triggerOn:'contextmenu'});
 }
 }
 }
