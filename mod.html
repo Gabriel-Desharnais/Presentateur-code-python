@@ -72,20 +72,19 @@
 	transition-duration: 0.2s;
 }
 .bouttonb{
-	background-color: #CCCFFF;
+	background-color: #EFEFFF;
 	border: none;
 	color: #000000;
 	font-size:12px;
 	font-weight: bold;
 	padding: 2px 0px;
 	width:100px;
-	text-align: center;
+	text-align: left;
 	text-decoration: none;
-	display: inline-block;
-	-webkit-transition-duration: 0.4s; /* Safari */
-	transition-duration: 0.4s;
-	float: left;					/*Colle les boutons les uns aux autres*/
-	border: 1px solid #0000b0;
+	display: block;
+	-webkit-transition-duration: 0.1s; /* Safari */
+	transition-duration: 0.1s;
+	border-Bottom: 1px solid #000000;
 }
 .bouttonb:hover{
 	background-color:#AAAAFF;
@@ -99,6 +98,9 @@
 	position:fixed;
 	left:100px;
 	top:100px;
+	border-top:1px solid #000000;
+	border-left:1px solid #000000;
+	border-right:1px solid #000000;
 	}
 
 		#creer{
@@ -127,11 +129,12 @@
 		</div>
 	<div id="outils">
 		<div id="creer">
-			 <button class="bouttonA" type="button" onclick="ajouter_text()">Créer</button> 
+			 <button class="bouttonA" type="button" onclick="ajouter_text()">Créer</button>
 		</div>
 	</div>
 	<div class="menud" id="droit">
-		<button class="bouttonb" type="button" onclick="ajouter_text()">Créer</button>
+		<button class="bouttonb" type="button" onclick="supprimer_that()">Supprimer</button>
+		<button class="bouttonb" type="button" onclick="propriete_that()">Propriété</button>
 	</div>
 		<script>
 			var inside = 0;
@@ -221,7 +224,10 @@
 						document.getElementById("droit").style.display="block";
 						
     });
-
+						document.getElementById("droit").addEventListener("click", function (event) {
+						document.getElementById("droit").style.display="none";
+						
+    });
 
 						
 						//list[i].contextMenu(menu,{triggerOn:'contextmenu'});
@@ -282,6 +288,12 @@
 			function modt(n){
 				document.getElementById('modn').value=n;
 				document.getElementById('mod').submit();
+			}
+			function supprimer_that(){
+				that.parentNode.removeChild(that);
+			}
+			function propriete_that(){
+				that.parentNode.removeChild(that);
 			}
 		</script>
 	</body>   
