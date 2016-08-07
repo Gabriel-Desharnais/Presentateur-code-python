@@ -49,7 +49,7 @@
 			width:5%;
 			background:#ccccff;
 			}
-		.bouttonA{
+.bouttonA{
 	background-color: #686FFF;
 	border: none;
 	color: #FFFFFF;
@@ -71,6 +71,36 @@
 	background-color:#AAAFFF;
 	transition-duration: 0.2s;
 }
+.bouttonb{
+	background-color: #CCCFFF;
+	border: none;
+	color: #000000;
+	font-size:12px;
+	font-weight: bold;
+	padding: 2px 0px;
+	width:100px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	-webkit-transition-duration: 0.4s; /* Safari */
+	transition-duration: 0.4s;
+	float: left;					/*Colle les boutons les uns aux autres*/
+	border: 1px solid #0000b0;
+}
+.bouttonb:hover{
+	background-color:#AAAAFF;
+}
+.bouttonb:active{
+	background-color:#6666FF;
+	transition-duration: 0.2s;
+}
+.menud{
+	display:none;
+	position:fixed;
+	left:100px;
+	top:100px;
+	}
+
 		#creer{
 			position:relative;
 			left:10px;
@@ -83,7 +113,8 @@
 
 
 	<body>
-	<div id="cont">
+	
+	<div id="cont" oncontextmenu="return false;">
 		<div id="first">
 		</div>
 		<div class="text" id="a1">
@@ -98,6 +129,9 @@
 		<div id="creer">
 			 <button class="bouttonA" type="button" onclick="ajouter_text()">Créer</button> 
 		</div>
+	</div>
+	<div class="menud" id="droit">
+		<button class="bouttonb" type="button" onclick="ajouter_text()">Créer</button>
 	</div>
 		<script>
 			var inside = 0;
@@ -171,21 +205,25 @@
     });
 						list[i].addEventListener("mouseover", function (event) {
 						this.style.border=3+'px solid black';
+    });
+						document.getElementById("cont").addEventListener('mousedown',function () {
+							document.getElementById("droit").style.display="none";
+	});
+						document.getElementById("outils").addEventListener('mousedown',function () {
+							document.getElementById("droit").style.display="none";
+	});
+												
+						 
+						list[i].addEventListener("contextmenu", function (event) {
+						that=this;
+						document.getElementById("droit").style.left=event.clientX+'px';
+						document.getElementById("droit").style.top=event.clientY+'px';
+						document.getElementById("droit").style.display="block";
 						
     });
-												var menu = [{
-        name: 'prop',
-        title: 'Propriété',
-        fun: function () {
-            alert('i am add button')
-        }
-    }];
-						list[i].addEventListener("click", function (event) {
-						that=this;
-						this.contextMenu(menu);
-						alert('e')
-    });
 
+
+						
 						//list[i].contextMenu(menu,{triggerOn:'contextmenu'});
 }
 }
