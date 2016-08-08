@@ -148,8 +148,8 @@
 	<!--Menu pour élément text html-->
 	<div class="menud" id="droit">
 		<button class="bouttonb" type="button" onclick="supprimer_that()">Supprimer</button>
-		<button class="bouttonb" type="button" onclick="supprimer_that()" style="border-top:1px solid #000000;">Avancer</button>
-		<button class="bouttonb" type="button" onclick="propriete_that()">Reculer</button>
+		<button class="bouttonb" type="button" onclick="avance_that()" style="border-top:1px solid #000000;">Avancer</button>
+		<button class="bouttonb" type="button" onclick="recule_that()">Reculer</button>
 		<button class="bouttonb" type="button" onclick="propriete_that()" style="border-top:1px solid #000000;">Propriété</button>
 	</div>
 	<form class="propriete" id="propText">
@@ -381,6 +381,17 @@
 							}
 						else{
 							}
+					}
+				function avance_that(){
+					//that.nextElementSibling.style.backgroundColor = '#fff';
+					if(that.nextElementSibling!=document.getElementById("last")){
+					document.getElementById('cont').insertBefore(that, that.nextElementSibling.nextElementSibling);
+					}
+					}
+				function recule_that(){
+					if(that.previousElementSibling != document.getElementById("first")){
+					document.getElementById('cont').insertBefore(that, that.previousElementSibling);
+					}
 					}
 		</script>
 	</body>   
