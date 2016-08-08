@@ -122,6 +122,12 @@
 	border:2px solid #000000;
 	border-radius: 5px;
 	}
+		textarea {
+     width: 100%;
+     -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+     -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+     box-sizing: border-box;         /* Opera/IE 8+ */
+}
 		</style>
 	</head>
 
@@ -134,7 +140,6 @@
 		<div class="text" id="a1">
 		</div>
 		<div class="text" id="a0">
-		<p>b 1</p>
 		</div>
 		<div id="last">
 		</div>
@@ -257,6 +262,22 @@
 						list[i].addEventListener("mouseover", function (event) {
 						this.style.border=3+'px solid black';
     });
+						list[i].addEventListener("dblclick", function (event) {
+						this.style.border=3+'px solid black';
+						var inn=this.innerHTML;
+						this.innerHTML="";
+						var element = document.createElement("textarea");
+						element.style.height="100%";
+						element.style.resize="none";
+						element.value=inn;
+						this.insertBefore(element, this.lastChild);
+						element.addEventListener("blur",function (event) {
+							this.parentElement.innerHTML=this.value;
+							//this.parentElement.removeChild(this);//innerHTML=hah;
+							});
+						element.focus();
+						
+    });
 						document.getElementById("cont").addEventListener('mousedown',function () {
 							document.getElementById("droit").style.display="none";
 	});
@@ -274,7 +295,6 @@
     });
 						document.getElementById("droit").addEventListener("click", function (event) {
 						document.getElementById("droit").style.display="none";
-						
     });
 
 						
@@ -329,7 +349,7 @@
 				xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 				xhttp.send("test="+encodeURIComponent(document.getElementById("1").value));
 			}
-			<!--Fonction pour afficher dans la sortie lentrée-->
+			//<!--Fonction pour afficher dans la sortie lentrée-->
 			function creer(){
 				document.getElementById("sortie").innerHTML= document.getElementById("1").value;
 			}
