@@ -109,7 +109,19 @@
 			top:10px;
 			height:50px;
 			width:50px;
+			
 			}
+		.propriete{
+	display:none;
+	position:fixed;
+	left:37.5%;
+	width:25%;
+	height:50%;
+	top:25%;
+	background:#FFFFFF;
+	border:2px solid #000000;
+	border-radius: 5px;
+	}
 		</style>
 	</head>
 
@@ -136,6 +148,32 @@
 		<button class="bouttonb" type="button" onclick="supprimer_that()">Supprimer</button>
 		<button class="bouttonb" type="button" onclick="propriete_that()">Propriété</button>
 	</div>
+	<form class="propriete" id="propText">
+	<input type="text"  name="Nom" placeholder="Nom de la boite" ><br>
+	<textarea name="description" id="r" rows="4" cols="44" form="usrform" style="resize: none;" placeholder="Description" onload="this.value='25';"></textarea>
+	couleur<br>
+	r:
+	<input type="range"  name="r" min="0" max="255">
+	<br>
+	g:
+	<input type="range" name="g" id="g" min="0" max="255">
+	<br>
+	b:
+	<input type="range" name="b" id="b" min="0" max="255">
+	<br>
+	opacity:
+	<input type="range" name="opacity" id="opacity" min="0" max="100">
+	<br>
+	<input type="reset">
+	</form>
+	
+	
+	
+	
+	
+	
+	
+	
 		<script>
 			var inside = 0;
 			var boxElement = document.getElementById('a0');
@@ -293,7 +331,8 @@
 				that.parentNode.removeChild(that);
 			}
 			function propriete_that(){
-				that.parentNode.removeChild(that);
+				document.getElementById("r").value=that.backgroundColor;
+				document.getElementById("propText").style.display="block";
 			}
 		</script>
 	</body>   
