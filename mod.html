@@ -153,18 +153,19 @@
 	<textarea name="description" id="description" rows="4" cols="44" form="usrform" style="resize: none;" placeholder="Description" onload="this.value='25';"></textarea>
 	couleur<br>
 	r:
-	<input type="range"  name="r" id="r" min="0" max="255">
+	<input type="range"  name="r" id="r" min="0" max="255" oninput="Sinc()">
 	<br>
 	g:
-	<input type="range" name="g" id="g" min="0" max="255">
+	<input type="range" name="g" id="g" min="0" max="255" oninput="Sinc()">
 	<br>
 	b:
-	<input type="range" name="b" id="b" min="0" max="255">
+	<input type="range" name="b" id="b" min="0" max="255" oninput="Sinc()">
 	<br>
 	opacity:
-	<input type="range" name="opacity" id="opacity" min="0" max="100">
+	<input type="range" name="opacity" id="opacity" min="0" max="100" oninput="Sinc()">
 	<br>
-	<input type="reset">
+	<button type="button" onclick="fermprop()">Fermer</button>
+	<input type="button" onclick="Appliquer()" id=appliquer value="Voir l'original">
 	</form>
 	
 	
@@ -183,6 +184,11 @@
 			var X=0;
 			var H=0;
 			var L=0;
+			var sinc=1;
+			var ogb=0;
+			var ogr=0;
+			var ogg=0;
+			var ogopacity=1;
 			var that=null;
 			ecoute();
 			function ecoute(){
@@ -331,12 +337,47 @@
 				that.parentNode.removeChild(that);
 			}
 			function propriete_that(){
-				document.getElementById("r").value=window.getComputedStyle(that,null).backgroundColor.split("(")[1].split(")")[0].split(",")[0];
-				document.getElementById("description").value=window.getComputedStyle(that,null).backgroundColor.split("(")[1].split(")")[0].split(",")[1].replace( /\s/g, "");
-				document.getElementById("g").value=window.getComputedStyle(that,null).backgroundColor.split("(")[1].split(")")[0].split(",")[1].replace( /\s/g, "");
-				document.getElementById("b").value=window.getComputedStyle(that,null).backgroundColor.split("(")[1].split(")")[0].split(",")[2].replace( /\s/g, "");
+				//Mettre de coté les propriété originalles 
+				ogr=window.getComputedStyle(that,null).backgroundColor.split("(")[1].split(")")[0].split(",")[0];
+				ogg=window.getComputedStyle(that,null).backgroundColor.split("(")[1].split(")")[0].split(",")[1].replace( /\s/g, "");
+				ogb=window.getComputedStyle(that,null).backgroundColor.split("(")[1].split(")")[0].split(",")[2].replace( /\s/g, "");
+				ogopacity=window.getComputedStyle(that,null).opacity;
+				
+				//Afficher les propriété originalles
+				document.getElementById("r").value=ogr;
+				//document.getElementById("description").value=window.getComputedStyle(that,null).opacity;
+				document.getElementById("g").value=ogg;
+				document.getElementById("b").value=ogb;
+				document.getElementById("opacity").value=(ogopacity*100);
 				document.getElementById("propText").style.display="block";
 			}
+			function fermprop(){
+				document.getElementById("propText").style.display="none";
+				}
+			function Appliquer(){
+				if(document.getElementById("appliquer").value=="Voir l'original"){
+					sinc=0;
+					document.getElementById("appliquer").value="Voir les changements";
+					//remettre aux trucs originaux
+					that.style.background="rgb("+ogr+","+ogg+","+ogb+")";
+					that.style.opacity=ogopacity;
+					}
+				else{
+					sinc=1;
+					//remettre aux nouveaux trucs
+					document.getElementById("appliquer").value="Voir l'original";
+					that.style.background="rgb("+document.getElementById("r").value+","+document.getElementById("g").value+","+document.getElementById("b").value+")";
+					that.style.opacity=(document.getElementById("opacity").value/100)+"";
+					}
+				}
+				function Sinc(){
+						if(sinc==1){
+								that.style.background="rgb("+document.getElementById("r").value+","+document.getElementById("g").value+","+document.getElementById("b").value+")";
+								that.style.opacity=(document.getElementById("opacity").value/100)+"";
+							}
+						else{
+							}
+					}
 		</script>
 	</body>   
 </html>
