@@ -150,10 +150,10 @@
 	</div>
 	<form class="propriete" id="propText">
 	<input type="text"  name="Nom" placeholder="Nom de la boite" ><br>
-	<textarea name="description" id="r" rows="4" cols="44" form="usrform" style="resize: none;" placeholder="Description" onload="this.value='25';"></textarea>
+	<textarea name="description" id="description" rows="4" cols="44" form="usrform" style="resize: none;" placeholder="Description" onload="this.value='25';"></textarea>
 	couleur<br>
 	r:
-	<input type="range"  name="r" min="0" max="255">
+	<input type="range"  name="r" id="r" min="0" max="255">
 	<br>
 	g:
 	<input type="range" name="g" id="g" min="0" max="255">
@@ -331,7 +331,10 @@
 				that.parentNode.removeChild(that);
 			}
 			function propriete_that(){
-				document.getElementById("r").value=that.backgroundColor;
+				document.getElementById("r").value=window.getComputedStyle(that,null).backgroundColor.split("(")[1].split(")")[0].split(",")[0];
+				document.getElementById("description").value=window.getComputedStyle(that,null).backgroundColor.split("(")[1].split(")")[0].split(",")[1].replace( /\s/g, "");
+				document.getElementById("g").value=window.getComputedStyle(that,null).backgroundColor.split("(")[1].split(")")[0].split(",")[1].replace( /\s/g, "");
+				document.getElementById("b").value=window.getComputedStyle(that,null).backgroundColor.split("(")[1].split(")")[0].split(",")[2].replace( /\s/g, "");
 				document.getElementById("propText").style.display="block";
 			}
 		</script>
