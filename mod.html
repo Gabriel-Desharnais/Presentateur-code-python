@@ -24,7 +24,7 @@
 			top:100px;
 			width:300px;
 			height:300px;
-			background:blue;
+			background-color:blue;
 			}
 		#a1{
 			left:550px;
@@ -135,13 +135,13 @@
 	<body>
 	
 	<div id="cont" oncontextmenu="return false;">
-		<div id="first">
+		<div id="first" style="position:fixed; height:100%; width:100%; top:0%; left:0%; background:#999999; opacity:1;">
 		</div>
 		<div class="text" id="a1">
 		</div>
 		<div class="text" id="a0">
 		</div>
-		<div id="last">
+		<div id="last" >
 		</div>
 		</div>
 	<div id="outils">
@@ -157,6 +157,11 @@
 		<button class="bouttonb" type="button" onclick="recule_that()">Reculer</button>
 		<button class="bouttonb" type="button" onclick="propriete_that()" style="border-top:1px solid #000000;">Propriété</button>
 	</div>
+	<!--Menu pour arrière plan-->
+	<div class="menud" id="droitap">
+		<button class="bouttonb" type="button" onclick="propriete_that()" style="border-top:1px solid #000000;">Propriété</button>
+	</div>
+	<!--formulaire de propriété-->
 	<form class="propriete" id="propText">
 	<input type="text"  name="Nom" placeholder="Nom de la boite" ><br>
 	<textarea name="description" id="description" rows="4" cols="44" form="usrform" style="resize: none;" placeholder="Description" onload="this.value='25';"></textarea>
@@ -280,9 +285,11 @@
     });
 						document.getElementById("cont").addEventListener('mousedown',function () {
 							document.getElementById("droit").style.display="none";
+							document.getElementById("droitap").style.display="none";
 	});
 						document.getElementById("outils").addEventListener('mousedown',function () {
 							document.getElementById("droit").style.display="none";
+							document.getElementById("droitap").style.display="none";
 	});
 												
 						 
@@ -293,8 +300,19 @@
 						document.getElementById("droit").style.display="block";
 						
     });
+						document.getElementById("first").addEventListener("contextmenu", function (event) {
+						that=this;
+						document.getElementById("droitap").style.left=event.clientX+'px';
+						document.getElementById("droitap").style.top=event.clientY+'px';
+						document.getElementById("droitap").style.display="block";
+						
+    });
+						
 						document.getElementById("droit").addEventListener("click", function (event) {
 						document.getElementById("droit").style.display="none";
+    });
+						document.getElementById("droitap").addEventListener("click", function (event) {
+						document.getElementById("droitap").style.display="none";
     });
 
 						
@@ -362,14 +380,19 @@
 			}
 			function propriete_that(){
 				//Mettre de coté les propriété originalles 
-				ogr=window.getComputedStyle(that,null).backgroundColor.split("(")[1].split(")")[0].split(",")[0];
-				ogg=window.getComputedStyle(that,null).backgroundColor.split("(")[1].split(")")[0].split(",")[1].replace( /\s/g, "");
-				ogb=window.getComputedStyle(that,null).backgroundColor.split("(")[1].split(")")[0].split(",")[2].replace( /\s/g, "");
-				ogopacity=window.getComputedStyle(that,null).opacity;
-				
+				var tab=window.getComputedStyle(that,null).backgroundColor.split("(")[1].split(")")[0].split(",")
+				ogr=tab[0];
+				ogg=tab[1].replace( /\s/g, "");
+				ogb=tab[2].replace( /\s/g, "");
+				if(tab.length==4){
+				ogopacity=tab[3].replace( /\s/g, "");
+				}
+				else{
+					ogopacity=1;
+					}
 				//Afficher les propriété originalles
 				document.getElementById("r").value=ogr;
-				//document.getElementById("description").value=window.getComputedStyle(that,null).opacity;
+				document.getElementById("description").value=window.getComputedStyle(that,null).backgroundColor;
 				document.getElementById("g").value=ogg;
 				document.getElementById("b").value=ogb;
 				document.getElementById("opacity").value=(ogopacity*100);
@@ -383,21 +406,18 @@
 					sinc=0;
 					document.getElementById("appliquer").value="Voir les changements";
 					//remettre aux trucs originaux
-					that.style.background="rgb("+ogr+","+ogg+","+ogb+")";
-					that.style.opacity=ogopacity;
+					that.style.background="rgba("+ogr+","+ogg+","+ogb+","+ogopacity+")";
 					}
 				else{
 					sinc=1;
 					//remettre aux nouveaux trucs
 					document.getElementById("appliquer").value="Voir l'original";
-					that.style.background="rgb("+document.getElementById("r").value+","+document.getElementById("g").value+","+document.getElementById("b").value+")";
-					that.style.opacity=(document.getElementById("opacity").value/100)+"";
+					that.style.background="rgba("+document.getElementById("r").value+","+document.getElementById("g").value+","+document.getElementById("b").value+","+(document.getElementById("opacity").value/100)+")";
 					}
 				}
 				function Sinc(){
 						if(sinc==1){
-								that.style.background="rgb("+document.getElementById("r").value+","+document.getElementById("g").value+","+document.getElementById("b").value+")";
-								that.style.opacity=(document.getElementById("opacity").value/100)+"";
+								that.style.background="rgba("+document.getElementById("r").value+","+document.getElementById("g").value+","+document.getElementById("b").value+","+(document.getElementById("opacity").value/100)+")";
 							}
 						else{
 							}
